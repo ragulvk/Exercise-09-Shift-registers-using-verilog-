@@ -1,8 +1,14 @@
 
 # Experiment--09-Implementation-of Shift-registers-using-verilog-
-### AIM: To implement PISO , PIPO,PISO  using verilog and validating their functionality using their functional tables
-### HARDWARE REQUIRED:  – PC, Cyclone II , USB flasher
-### SOFTWARE REQUIRED:   Quartus prime
+### AIM:
+To implement PISO , PIPO,PISO  using verilog and validating their functionality using their functional tables
+
+### HARDWARE REQUIRED: 
+– PC, Cyclone II , USB flasher
+
+### SOFTWARE REQUIRED:  
+Quartus prime
+
 ### THEORY 
 Shift registers are basically of 4 types. These are:
 
@@ -41,16 +47,42 @@ FIGURE-04
 A Parallel in Parallel out (PIPO) shift register is used as a temporary storage device and like SISO Shift register it acts as a delay element.
 
 ### Procedure
-/* write all the steps invloved */
+
+1.Use quartus software and import required modules.
 
 
+2.Assign inputs and outputs for shift registers.
 
-### PROGRAM 
-/*
+
+3.Assign logic for input to give output at positive edge.
+
+
+4.Perform opertaions and produce rtl circuit.
+
+
+5.end module
+
+
+### PROGRAM 1
+```
 Program for  Implementation-of Shift-registers-using-verilog-
-Developed by: RAGUL VK
-RegisterNumber: 212221240043
-*/
+Developed by: EASWAR17
+RegisterNumber:  212221230024
+
+module sipo(c,si,po);
+input c,si;
+output [7:0] po;
+reg [7:0] temp;
+
+always @ (posedge c)
+begin
+temp = {temp[6:0],si};
+end
+assign po = temp;
+endmodule 
+
+
+```
 
 
 
@@ -60,9 +92,7 @@ RegisterNumber: 212221240043
 ### RTL LOGIC  REGISTERS   
 
 
-
-
-
+![decoder1](https://user-images.githubusercontent.com/94154683/172343226-35e7994d-fd15-474b-8ad3-d0b5951361d7.png)
 
 
 
@@ -71,9 +101,76 @@ RegisterNumber: 212221240043
 
 
 
+![SSS](https://user-images.githubusercontent.com/94154683/172343477-d655b5aa-1425-4a76-bca7-0de2ab5bc82f.jpeg)
 
+### PROGRAM 2
+```
+Program for  Implementation-of Shift-registers-using-verilog-
+Developed by: EASWAR17
+RegisterNumber:  212221230024
+
+module piro(c,pi,so,load);
+input [3:0] pi;
+input load,c;
+output reg so;
+reg [3:0] temp;
+always @ (posedge c)
+begin 
+if(load)
+temp <= pi;
+else
+begin
+so<=temp[3];
+temp <={temp[2:0],1'b0};
+end
+end
+endmodule
+
+```
+
+
+### RTL LOGIC REGISTERS:
+
+
+![ss2](https://user-images.githubusercontent.com/94154683/172343913-256260d6-9cce-43cf-b513-941100041544.png)
+
+
+### TIMING DIGRAMS FOR SHIFT REGISTERS
+
+![SWQ](https://user-images.githubusercontent.com/94154683/172344015-e16e255a-db94-4c06-890d-6588ce130c18.jpeg)
+
+
+### PROGRAM 3:
+
+```
+Program for  Implementation-of Shift-registers-using-verilog-
+Developed by: EASWAR17
+RegisterNumber:  212221230024
+
+module sipo(pi,po,clk);
+input clk;
+input [3:0] pi;
+output reg [3:0] po;
+always @ (posedge clk)
+begin 
+po=pi;
+end
+endmodule 
+
+```
+
+### RTL LOGIC REGISTERS:
+
+![ss3](https://user-images.githubusercontent.com/94154683/172344360-bd4ff61b-045e-48fc-aa3c-5307143dfa9d.png)
+
+
+
+### TIMING DIGRAMS FOR SHIFT REGISTERS
+
+![ASD](https://user-images.githubusercontent.com/94154683/172344436-bce4ef17-9b7e-4ed0-99f4-7c85e2be9979.jpeg)
 
 
 
 
 ### RESULTS 
+ THUS THE PROGRAM TO IMPLEMENT SHIFT REGISTERS IS DONE SUCCESSFUL.
